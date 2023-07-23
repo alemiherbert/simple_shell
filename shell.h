@@ -7,7 +7,7 @@
 #include <string.h>
 #include <stdbool.h>
 
-
+#define MAX_TOKEN_SIZE = 512
 /**
  */
 

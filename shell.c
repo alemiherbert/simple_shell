@@ -1,6 +1,5 @@
 #include "shell.h"
 
-
 /**
  * main - a command line executor
  * @argc: the argument count
