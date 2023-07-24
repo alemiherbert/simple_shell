@@ -7,8 +7,9 @@
 #include <string.h>
 #include <stdbool.h>
 
-#define MAX_TOKEN_SIZE = 512
-/**
- */
+
+#define DELIM " \a\t\n"
+#define MAX_TOKEN_SIZE 512
+#define MAX_BUFFER_SIZE 1024
 
 #endif

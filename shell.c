@@ -12,12 +12,14 @@ int main(void)
 	size_t len = 0;
 	ssize_t nread;
 	bool status = true;
+	state_t state;
 
 	do
 	{
-		printf("$ ");
-		nread = getline(&line, &len, stdin);
+		if (is_interactive(&state));
+			printf("$ ");
 
+		nread = getline(&line, &len, stdin);
 		if (nread == EOF)
 			status = false;
 		
