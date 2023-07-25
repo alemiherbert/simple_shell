@@ -10,7 +10,7 @@
 char **tokenise(char *command, char *delim)
 {
 	char *token = NULL, **tokens, *temp_command;
-	size_t size, i = 0;
+	size_t size, i;
 
 	size = MAX_TOKEN_SIZE;
 	if (command == NULL)
@@ -24,9 +24,9 @@ char **tokenise(char *command, char *delim)
 	temp_command = strdup(command);
 
 	token = strtok(temp_command, delim);
-	while (token != NULL)
+	for (i = 0; token != NULL; i++)
 	{
-		tokens[i++] = strdup(token);
+		tokens[i] = strdup(token);
 
 		if (i >= MAX_TOKEN_SIZE)
 		{
@@ -38,6 +38,7 @@ char **tokenise(char *command, char *delim)
 		token = strtok(NULL, delim);
 	}
 
+	tokens[i] = NULL;
 	free(temp_command);
 	return (tokens);
 }

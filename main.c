@@ -17,17 +17,22 @@ int main(void)
     {
         printf("$ ");
         nread = getline(&line, &len, stdin);
-
         if (nread == EOF)
         {
+            putchar('\n');
             free(line);
-            break;
+            exit(EXIT_FAILURE);
         }
 
         args = tokenise(line, DELIM);
 
+        if (strcmp(args[0], "exit") == 0)
+            exit(EXIT_FAILURE);
+
         command = locate_executable(args[0]);
-        run_command(command, args);
+        status = run_command(command, args);
+        if (status == false)
+            perror(command);
 
         if (line != NULL)
         {
