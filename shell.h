@@ -10,6 +10,8 @@
 #include <sys/types.h>
 #include <sys/wait.h>
 #include <errno.h>
+#include <signal.h>
+
 
 #define DELIM " \a\t\n"
 #define MAX_TOKEN_SIZE 512
@@ -29,5 +31,6 @@ void handle_error(short code);
 
 int cd(char *path);
 
+void sigint_handler(int signum);
 
 #endif
