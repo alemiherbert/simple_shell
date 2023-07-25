@@ -15,6 +15,8 @@
 #define MAX_TOKEN_SIZE 512
 #define MAX_BUFFER_SIZE 1024
 
+extern char **environ;
+
 char *readline(FILE *stream);
 char **tokenise(char *command, char *delim);
 char *join_path(const char *dir, const char *file);
@@ -23,5 +25,9 @@ void free_tokens(char **tokens);
 bool run_command(char *command, char **args);
 
 void handle_error(short code);
+
+
+int cd(char *path);
+
 
 #endif

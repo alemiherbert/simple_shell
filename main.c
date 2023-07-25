@@ -6,22 +6,25 @@
  * @argv: the argument vector
  * Return: Always 0
  */
-int main(void)
+int main(int argc, char **argv, char **env)
 {
 	char **args, *line = NULL;
 	bool status = true;
 
+
 	do {
-		printf("$ ");
+		write(1, "$ ", 2);
 		line = readline(stdin);
 		if (line == NULL)
 		{
-			putchar('\n');
+			write(1, "\n", 1);
 			free(line);
 			break;
 		}
 
 		args = tokenise(line, DELIM);
+		if (!args)
+			exit(EXIT_FAILURE);
 
 		if (strcmp(args[0], "exit") == 0)
 			exit(EXIT_FAILURE);

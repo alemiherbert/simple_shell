@@ -130,16 +130,14 @@ bool run_command(char *command, char **args)
 	int status;
 	pid_t pid = fork();
 
-	if (pid <= -1)
-		return (false);
-	else if (pid == 0)
+	if (pid == 0)
 	{
 		status = execve(command, args, NULL);
 		if (status <= -1)
 			return (false);
 	}
 	else
-		wait(&status);
+		waitpid(pid, &status, 2);
 
 	return (true);
 }
