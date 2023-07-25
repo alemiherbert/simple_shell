@@ -8,19 +8,17 @@
  */
 int main(void)
 {
-	char *command, **args, *line = NULL;
-	size_t len = MAX_BUFFER_SIZE;
-	ssize_t nread;
+	char **args, *line = NULL;
 	bool status = true;
 
 	do {
 		printf("$ ");
-		nread = getline(&line, &len, stdin);
-		if (nread == EOF)
+		line = readline(stdin);
+		if (line == NULL)
 		{
 			putchar('\n');
 			free(line);
-			exit(EXIT_FAILURE);
+			break;
 		}
 
 		args = tokenise(line, DELIM);
@@ -28,17 +26,15 @@ int main(void)
 		if (strcmp(args[0], "exit") == 0)
 			exit(EXIT_FAILURE);
 
-		command = locate_executable(args[0]);
-		status = run_command(command, args);
+		status = run_command(locate_executable(args[0]), args);
 		if (status == false)
-			perror(command);
+			perror(args[0]);
 
 		if (line != NULL)
 		{
 			free(line);
 			line = NULL;
 		}
-		free(command);
 		free(args);
 	} while (status == true);
 	return (0);

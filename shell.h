@@ -15,6 +15,7 @@
 #define MAX_TOKEN_SIZE 512
 #define MAX_BUFFER_SIZE 1024
 
+char *readline(FILE *stream);
 char **tokenise(char *command, char *delim);
 char *join_path(const char *dir, const char *file);
 char *locate_executable(const char *filename);
