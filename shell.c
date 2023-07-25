@@ -8,22 +8,30 @@
  */
 int main(void)
 {
-	char *line = NULL;
+	char **command, *line = NULL;
 	size_t len = 0;
 	ssize_t nread;
-	bool status = true;
-	state_t state;
+	int status;
+	pid_t pid;
 
 	do
 	{
-		if (is_interactive(&state));
-			printf("$ ");
+		printf("$ ");
 
 		nread = getline(&line, &len, stdin);
-		if (nread == EOF)
-			status = false;
-		
-		printf("%s", line);
-	} while (status == true);
+		command = tokenise(line, DELIM);
+		pid = fork();
+		if (pid == 0)
+		{
+			status = execve(locate_executable(command[0]), command, NULL);
+			if (status == -1);
+				perror("./shell");
+		}
+		if (pid == -1)
+			perror("./shell");
+		else
+			wait(&status);
+
+	} while (nread != EOF);
 	return (0);
 }
