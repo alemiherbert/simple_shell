@@ -19,6 +19,7 @@ char **tokenise(char *command, char *delim);
 char *join_path(const char *dir, const char *file);
 char *locate_executable(const char *filename);
 void free_tokens(char **tokens);
+bool run_command(char *command, char **args);
 
 void handle_error(short code);
 

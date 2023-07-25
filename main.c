@@ -8,16 +8,34 @@
  */
 int main(void)
 {
-	char **command, *line = NULL;
-	size_t len = 0;
-	ssize_t nread;
+    char *command, **args, *line = NULL;
+    size_t len = MAX_BUFFER_SIZE;
+    ssize_t nread;
+    bool status = true;
 
-	do
-	{
-		printf("$ ");
-		nread = getline(&line, &len, stdin);
-		command = tokenise(line, DELIM);
+    do
+    {
+        printf("$ ");
+        nread = getline(&line, &len, stdin);
 
-	} while (nread != EOF);
-	return (0);
+        if (nread == EOF)
+        {
+            free(line);
+            break;
+        }
+
+        args = tokenise(line, DELIM);
+
+        command = locate_executable(args[0]);
+        run_command(command, args);
+
+        if (line != NULL)
+        {
+            free(line);
+            line = NULL;
+        }
+        free(command);
+        free(args);
+    } while (status == true);
+    return (0);
 }

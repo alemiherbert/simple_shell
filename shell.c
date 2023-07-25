@@ -1,7 +1,5 @@
 #include "shell.h"
 
-
-
 /**
  * tokenise - split a string into tokens
  * @command: the string
@@ -12,12 +10,13 @@
 char **tokenise(char *command, char *delim)
 {
 	char *token = NULL, **tokens, *temp_command;
-	size_t i = 0;
+	size_t size, i = 0;
 
+	size = MAX_TOKEN_SIZE;
 	if (command == NULL)
 		return (NULL);
 
-	tokens = malloc(sizeof(char *) * MAX_TOKEN_SIZE);
+	tokens = malloc(sizeof(char *) * size);
 	if (tokens == NULL)
 		return (NULL);
 
@@ -25,17 +24,23 @@ char **tokenise(char *command, char *delim)
 	temp_command = strdup(command);
 
 	token = strtok(temp_command, delim);
-	while (token != NULL && i < MAX_TOKEN_SIZE)
+	while (token != NULL)
 	{
-		tokens[i] = strdup(token);
+		tokens[i++] = strdup(token);
+
+		if (i >= MAX_TOKEN_SIZE)
+		{
+			size += MAX_TOKEN_SIZE;
+			tokens = realloc(tokens, sizeof(char *) * size);
+			if (tokens == NULL)
+				return (NULL);
+		}
 		token = strtok(NULL, delim);
-		i++;
 	}
 
 	free(temp_command);
 	return (tokens);
 }
-
 
 /**
  * locate_executable - find the path to an executable
@@ -46,36 +51,37 @@ char **tokenise(char *command, char *delim)
 char *locate_executable(const char *filename)
 {
 	size_t i;
-	char *command;
-	char *path = getenv("PATH");
-	char **tokens = tokenise(path, ":");
+	char *command = NULL, *path, **tokens;
 	struct stat st;
 
-	if (tokens != NULL)
+	path = getenv("PATH");
+	tokens = tokenise(strdup(path), ":");
+
+	if (stat(filename, &st) == 0)
+	{
+		command = strdup(filename);
+	}
+	else
 	{
 		for (i = 0; tokens[i] != NULL; i++)
 		{
-			command = join_path(tokens[i], filename);
-			if (command != NULL && stat(command, &st) == 0)
-			{
-				free_tokens(tokens);
-				return (command);
-			}
 			free(command);
+			command = join_path(tokens[i], filename);
+			if (stat(command, &st) == 0)
+				break;
 		}
-		free_tokens(tokens);
 	}
-	return (NULL);
+	free_tokens(tokens);
+	return (command);
 }
-
 
 /**
  * run_command - executes a command
  * @command: the command
  * @args: the arguments to the command
- * 
+ *
  * Return: 1 if success, else 0
-*/
+ */
 bool run_command(char *command, char **args)
 {
 	int status;
@@ -90,7 +96,7 @@ bool run_command(char *command, char **args)
 			return false;
 	}
 	else
-	wait (&status);
+		wait(&status);
 
 	return (true);
 }
