@@ -94,7 +94,7 @@ bool run_command(char *command, char **args)
 	{
 		status = execve(command, args, NULL);
 		if (status <= -1)
-			return false;
+			return (false);
 	}
 	else
 		wait(&status);
