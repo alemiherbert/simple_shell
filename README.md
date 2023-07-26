@@ -1,13 +1,3 @@
-  \____/_/   \_\_| |_____|____/   \___/|_|    
-
-                                       ____  _   _ _____ _     _     
-                                      / ___|| | | | ____| |   | |    
-                                      \___ \| |_| |  _| | |   | |    
-                                       ___) |  _  | |___| |___| |___ 
-                                      |____/|_| |_|_____|_____|_____|
-                                                                      
-```
-
 ## ALX africa
 The gates of shell is an ALX School project in the first trimester, helps student to understand the advanced
 concepts behind the shell program include process, system call, bit manipulation, file managment, error handling 
