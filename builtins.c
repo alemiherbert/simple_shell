@@ -119,7 +119,6 @@ int handle_builtin(state_t *data)
 		{NULL, NULL}
 	};
 	int i = 0;
-
 	while ((blt + i)->cmd)
 	{
 		if (_strcmp(data->args[0], (blt + i)->cmd) == 0)
