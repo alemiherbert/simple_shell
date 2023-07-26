@@ -65,7 +65,7 @@ typedef struct builtin
 /* ----------Process prototype------------*/
 int readLine(state_t *);
 int splitLine(state_t *);
-int parseLline(state_t *);
+int parseLine(state_t *);
 int process_cmd(state_t *);
 
 /* ----------String prototype------------*/
@@ -82,13 +82,13 @@ char *_strcpy(char *dest, char *source);
 void *_realloc(void *ptr, unsigned int old_size, unsigned int new_size);
 char *_memset(char *s, char byt, unsigned int n);
 char *_memcpy(char *dest, char *src, unsigned int n);
-int freeData(state_t *);
+int free_data(state_t *);
 
 /* ----------Tools prototype-------------*/
 void *fill_an_array(void *a, int el, unsigned int len);
 void signal_handler(int signo);
 char *_getenv(char *path_name);
-void indexCmd(state_t *data);
+void index_cmd(state_t *data);
 void array_rev(char *arr, int len);
 
 /* ----------More tools prototype--------*/

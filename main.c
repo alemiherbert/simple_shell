@@ -14,7 +14,7 @@ int main(void)
 	signal(SIGINT, signal_handler);
 	while (1)
 	{
-		indexCmd(&data);
+		index_cmd(&data);
 		if (readLine(&data) < 0)
 		{
 			if (isatty(STDIN_FILENO))
@@ -23,13 +23,13 @@ int main(void)
 		}
 		if (splitLine(&data) < 0)
 		{
-			freeData(&data);
+			free_data(&data);
 			continue;
 		}
 		pl = parseLine(&data);
 		if (pl == 0)
 		{
-			freeData(&data);
+			free_data(&data);
 			continue;
 		}
 		if (pl < 0)
@@ -42,9 +42,9 @@ int main(void)
 			print_error(&data);
 			break;
 		}
-		freeData(&data);
+		free_data(&data);
 	}
-	freeData(&data);
+	free_data(&data);
 	exit(EXIT_SUCCESS);
 }
 
