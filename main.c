@@ -14,7 +14,7 @@ int main(void)
 	signal(SIGINT, signal_handler);
 	while (1)
 	{
-		index_cmd(&data);
+		indexCmd(&data);
 		if (readLine(&data) < 0)
 		{
 			if (isatty(STDIN_FILENO))
