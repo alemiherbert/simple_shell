@@ -75,7 +75,7 @@ int intlen(int num)
  * Return: (Success) a positive number
  * ------- (Fail) a negative number
  */
-int print_error(sh_t *data)
+int print_error(state_t *data)
 {
 	char *idx = _itoa(data->index);
 
@@ -96,7 +96,7 @@ int print_error(sh_t *data)
  * Return: (Success) a positive number
  * ------- (Fail) a negative number
  */
-int write_history(sh_t *data __attribute__((unused)))
+int write_history(state_t *data __attribute__((unused)))
 {
 	char *filename = "history";
 	char *line_of_history = "this is a line of history";

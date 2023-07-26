@@ -6,7 +6,7 @@
  * Return: (Success)
  * ------- (Fail) otherwise
  */
-int is_path_form(sh_t *data)
+int is_path_form(state_t *data)
 {
 	if (_strchr(data->args[0], '/') != 0)
 	{
@@ -23,7 +23,7 @@ int is_path_form(sh_t *data)
  * Return: (Success)
  * ------- (Fail) otherwise
  */
-void is_short_form(sh_t *data)
+void is_short_form(state_t *data)
 {
 	char *path, *token, *_path;
 	struct stat st;
@@ -57,7 +57,7 @@ void is_short_form(sh_t *data)
  * Return: (Success) 0 is returned
  * ------- (Fail) negative number will returned
  */
-int is_builtin(sh_t *data)
+int is_builtin(state_t *data)
 {
 	blt_t blt[] = {
 		{"exit", abort_prg},

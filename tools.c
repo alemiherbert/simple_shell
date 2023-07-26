@@ -89,7 +89,7 @@ void array_rev(char *arr, int len)
  *
  * Return: void
  */
-void index_cmd(sh_t *data)
+void index_cmd(state_t *data)
 {
 	data->index += 1;
 }
