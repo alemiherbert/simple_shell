@@ -2,22 +2,32 @@
 #define SHELL_H
 
 #include <stdio.h>
+#include <fcntl.h>
+#include <errno.h>
 #include <stdlib.h>
 #include <unistd.h>
 #include <string.h>
+#include <signal.h>
 #include <stdbool.h>
+#include <sys/wait.h>
 #include <sys/stat.h>
 #include <sys/types.h>
-#include <sys/wait.h>
-#include <errno.h>
-#include <signal.h>
 
 
-#define DELIM " \a\t\n"
-#define MAX_TOKEN_SIZE 512
-#define MAX_BUFFER_SIZE 1024
+#define DELIM " \a\n\r\t"
+#define TOKEN_SIZE 64
+#define BUFFER_SIZE 256
 
 extern char **environ;
+
+
+void displayPrompt(int, struct stat);
+ssize_t getLine(char **lineptr, size_t *n, FILE *stream);
+
+int readLine(char **line);
+int splitLine(char *line, char ***args);
+void freeTokens(char **args, int num_args);
+
 
 char *readline(FILE *stream);
 char **tokenise(char *command, char *delim);

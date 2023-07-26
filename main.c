@@ -8,13 +8,18 @@
  */
 int main(int argc, char **argv, char **env)
 {
-	char **args, *line = NULL;
 	bool status = true;
+	char *cmd, **args, *line, *error_msg, *oldpwd;
+	unsigned long int index = 0;
 
+	do
+	{
+		if (isatty(STDIN_FILENO))
+		{
+			write(1, "$ ", 2);
+			readLine(&line);
+		}
 
-	do {
-		write(1, "$ ", 2);
-		line = readline(stdin);
 		if (line == NULL)
 		{
 			write(1, "\n", 1);
@@ -22,12 +27,13 @@ int main(int argc, char **argv, char **env)
 			break;
 		}
 
-		args = tokenise(line, DELIM);
+		splitLine(line, &args);
+
 		if (!args)
 			exit(EXIT_FAILURE);
 
 		if (strcmp(args[0], "exit") == 0)
-			exit(EXIT_FAILURE);
+			break;
 
 		status = run_command(locate_executable(args[0]), args);
 		if (status == false)
@@ -39,6 +45,8 @@ int main(int argc, char **argv, char **env)
 			line = NULL;
 		}
 		free(args);
+		free(error_msg);
+		free(oldpwd);
 	} while (status == true);
 	return (0);
 }
