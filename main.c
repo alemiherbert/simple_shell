@@ -26,7 +26,7 @@ int main(void)
 			free_data(&data);
 			continue;
 		}
-		pl = parse_line(&data);
+		pl = parseLine(&data);
 		if (pl == 0)
 		{
 			free_data(&data);
@@ -131,13 +131,13 @@ int split_line(state_t *data)
 #undef DELIMITER
 #define DELIMITER ":"
 /**
- * parse_line - parses arguments to valid command
+ * parseLine - parses arguments to valid command
  * @data: a pointer to the struct of data
  *
  * Return: (Success) a positive number
  * ------- (Fail) a negative number
  */
-int parse_line(state_t *data)
+int parseLine(state_t *data)
 {
 	if (is_path_form(data) > 0)
 		return (SUCCESS);
