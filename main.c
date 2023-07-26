@@ -23,13 +23,13 @@ int main(void)
 		}
 		if (split_line(&data) < 0)
 		{
-			free_data(&data);
+			freeData(&data);
 			continue;
 		}
 		pl = parseLine(&data);
 		if (pl == 0)
 		{
-			free_data(&data);
+			freeData(&data);
 			continue;
 		}
 		if (pl < 0)
@@ -42,9 +42,9 @@ int main(void)
 			print_error(&data);
 			break;
 		}
-		free_data(&data);
+		freeData(&data);
 	}
-	free_data(&data);
+	freeData(&data);
 	exit(EXIT_SUCCESS);
 }
 
