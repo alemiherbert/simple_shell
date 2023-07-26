@@ -4,11 +4,10 @@
  * main - the main function
  *
  * Return: (Success) 0 always
- * ------- (Fail) we drop out the looser :)
  */
 int main(void)
 {
-	sh_t data;
+	state_t data;
 	int pl;
 
 	_memset((void *)&data, 0, sizeof(data));
@@ -16,7 +15,7 @@ int main(void)
 	while (1)
 	{
 		index_cmd(&data);
-		if (read_line(&data) < 0)
+		if (readLine(&data) < 0)
 		{
 			if (isatty(STDIN_FILENO))
 				PRINT("\n");
@@ -50,13 +49,13 @@ int main(void)
 }
 
 /**
- * read_line - read a line from the standard input
+ * readLine - read a line from the standard input
  * @data: a pointer to the struct of data
  *
  * Return: (Success) a positive number
  * ------- (Fail) a negative number
  */
-int read_line(sh_t *data)
+int readLine(state_t *data)
 {
 	char *csr_ptr, *end_ptr, c;
 	size_t size = BUFSIZE, read_st, length, new_size;
@@ -99,7 +98,7 @@ int read_line(sh_t *data)
  * Return: (Success) a positive number
  * ------- (Fail) a negative number
  */
-int split_line(sh_t *data)
+int split_line(state_t *data)
 {
 	char *token;
 	size_t size = TOKENSIZE, new_size, i = 0;
@@ -138,7 +137,7 @@ int split_line(sh_t *data)
  * Return: (Success) a positive number
  * ------- (Fail) a negative number
  */
-int parse_line(sh_t *data)
+int parse_line(state_t *data)
 {
 	if (is_path_form(data) > 0)
 		return (SUCCESS);
@@ -159,7 +158,7 @@ int parse_line(sh_t *data)
  * Return: (Success) a positive number
  * ------- (Fail) a negative number
  */
-int process_cmd(sh_t *data)
+int process_cmd(state_t *data)
 {
 	pid_t pid;
 	int status;

@@ -8,7 +8,7 @@
  * Return: (Success) 0 is returned
  * ------- (Fail) negative number will returned
  */
-int change_dir(sh_t *data)
+int change_dir(state_t *data)
 {
 	char *home;
 
@@ -51,7 +51,7 @@ int change_dir(sh_t *data)
  * Return: (Success) 0 is returned
  * ------- (Fail) negative number will returned
  */
-int abort_prg(sh_t *data __attribute__((unused)))
+int abort_prg(state_t *data __attribute__((unused)))
 {
 	int code, i = 0;
 
@@ -79,7 +79,7 @@ int abort_prg(sh_t *data __attribute__((unused)))
  * Return: (Success) 0 is returned
  * ------- (Fail) negative number will returned
  */
-int display_help(sh_t *data)
+int display_help(state_t *data)
 {
 	int fd, fw, rd = 1;
 	char c;
@@ -110,7 +110,7 @@ int display_help(sh_t *data)
  * Return: (Success) 0 is returned
  * ------- (Fail) negative number will returned
  */
-int handle_builtin(sh_t *data)
+int handle_builtin(state_t *data)
 {
 	blt_t blt[] = {
 		{"exit", abort_prg},

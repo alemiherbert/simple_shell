@@ -59,7 +59,7 @@ char *_memset(char *s, char byt, unsigned int n)
  * Return: (Success) positive number
  * ------- (Fail) negative number
  */
-int free_data(sh_t *data)
+int free_data(state_t *data)
 {
 	free(data->line);
 	data->line = NULL;
