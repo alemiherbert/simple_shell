@@ -65,7 +65,3 @@ You need to make sure that this shell tested and garantees work based on `gcc-4.
 * Display help `help [BUILTIN]`
 * Display history `history`
 
-
-
-## Authors
-Issam Sebri - Machine learning enthusiast & full stack developer - [Linkedin](https://www.linkedin.com/in/issam-sebri/) - [Twitter](https://twitter.com/KoeusIss)
