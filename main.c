@@ -21,7 +21,7 @@ int main(void)
 				PRINT("\n");
 			break;
 		}
-		if (split_line(&data) < 0)
+		if (splitLine(&data) < 0)
 		{
 			freeData(&data);
 			continue;
@@ -92,13 +92,13 @@ int readLine(state_t *data)
 }
 #define DELIMITER " \n\t\r\a\v"
 /**
- * split_line - splits line to tokens
+ * splitLine - splits line to tokens
  * @data: a pointer to the struct of data
  *
  * Return: (Success) a positive number
  * ------- (Fail) a negative number
  */
-int split_line(state_t *data)
+int splitLine(state_t *data)
 {
 	char *token;
 	size_t size = TOKENSIZE, new_size, i = 0;
